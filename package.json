@@ -1,0 +1,11 @@
+{
+  "name": "apicurio",
+  "version": "0.1.0",
+  "type": "commonjs",
+  "scripts": {
+    "test": "tsc --pretty false && node dist/tests/policy.test.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
