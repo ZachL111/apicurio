@@ -62,3 +62,13 @@ node dist/tests/policy.test.js
 node dist/tests/domainReview.test.js
 
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check-apicurio-detail.ps1
+
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check-apicurio-properties.ps1
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check-apicurio-golden.ps1
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

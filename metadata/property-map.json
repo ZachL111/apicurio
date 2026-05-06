@@ -1,0 +1,28 @@
+{
+  "repo": "apicurio",
+  "language": "TypeScript",
+  "category": "API tooling",
+  "goal": "Diff OpenAPI fragments and classify breaking or additive changes.",
+  "weights": {
+    "signal": 2,
+    "slack": 1,
+    "confidence": 1,
+    "drag": 2
+  },
+  "thresholds": {
+    "ship": 157,
+    "watch": 120
+  },
+  "properties": [
+    "raising signal cannot reduce score",
+    "raising drag cannot improve score",
+    "lane labels must match configured thresholds",
+    "golden fixture ids must remain unique"
+  ],
+  "fixture_files": [
+    "fixtures/golden/scoreboard.csv",
+    "fixtures/golden/lane-matrix.csv",
+    "fixtures/fuzz/mutations.csv",
+    "fixtures/fuzz/boundary-cases.jsonl"
+  ]
+}

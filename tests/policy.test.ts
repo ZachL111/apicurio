@@ -1,7 +1,14 @@
-import * as assert from "node:assert/strict";
+function equal<T>(actual: T, expected: T): void {
+  if (actual !== expected) {
+    throw new Error(`expected ${expected}, got ${actual}`);
+  }
+}
+
 import { classify, score, Signal } from "../src/policy";
 
-const cases: Array<Signal & { score: number; decision: "accept" | "review" }> = [
+type FixtureCase = Signal & { name: string; score: number; decision: "accept" | "review" };
+
+const cases: FixtureCase[] = [
   {
     "name": "case_1",
     "demand": 84,
@@ -35,6 +42,6 @@ const cases: Array<Signal & { score: number; decision: "accept" | "review" }> = 
 ];
 
 for (const item of cases) {
-  assert.equal(score(item), item.score);
-  assert.equal(classify(item), item.decision);
+  equal(score(item), item.score);
+  equal(classify(item), item.decision);
 }
