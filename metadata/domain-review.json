@@ -1,0 +1,73 @@
+{
+  "repo": "apicurio",
+  "language": "TypeScript",
+  "category": "API tooling",
+  "goal": "Diff OpenAPI fragments and classify breaking or additive changes.",
+  "review_model": {
+    "terms": [
+      "contract drift",
+      "schema width",
+      "breaking risk",
+      "consumer reach"
+    ],
+    "lanes": [
+      "ship",
+      "watch",
+      "hold"
+    ],
+    "score": "signal * 2 + slack + confidence - drag * 3",
+    "purpose": "surface the domain-specific cases that need the most careful review"
+  },
+  "cases": [
+    {
+      "name": "baseline",
+      "focus": "contract drift",
+      "signal": 56,
+      "slack": 48,
+      "drag": 29,
+      "confidence": 77,
+      "score": 150,
+      "lane": "ship"
+    },
+    {
+      "name": "stress",
+      "focus": "schema width",
+      "signal": 70,
+      "slack": 26,
+      "drag": 22,
+      "confidence": 65,
+      "score": 165,
+      "lane": "ship"
+    },
+    {
+      "name": "edge",
+      "focus": "breaking risk",
+      "signal": 49,
+      "slack": 40,
+      "drag": 13,
+      "confidence": 75,
+      "score": 174,
+      "lane": "ship"
+    },
+    {
+      "name": "recovery",
+      "focus": "consumer reach",
+      "signal": 80,
+      "slack": 54,
+      "drag": 12,
+      "confidence": 77,
+      "score": 255,
+      "lane": "ship"
+    },
+    {
+      "name": "stale",
+      "focus": "contract drift",
+      "signal": 66,
+      "slack": 39,
+      "drag": 12,
+      "confidence": 53,
+      "score": 188,
+      "lane": "ship"
+    }
+  ]
+}

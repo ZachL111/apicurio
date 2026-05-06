@@ -57,3 +57,8 @@ foreach ($pathPattern in $knownPaths) {
 
 tsc --pretty false
 node dist/tests/policy.test.js
+
+
+node dist/tests/domainReview.test.js
+
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check-apicurio-detail.ps1

@@ -1,0 +1,6 @@
+name,focus,signal,slack,drag,confidence,score,lane
+baseline,contract drift,56,48,29,77,150,ship
+stress,schema width,70,26,22,65,165,ship
+edge,breaking risk,49,40,13,75,174,ship
+recovery,consumer reach,80,54,12,77,255,ship
+stale,contract drift,66,39,12,53,188,ship
