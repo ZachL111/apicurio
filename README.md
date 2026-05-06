@@ -1,26 +1,37 @@
 # apicurio
 
-apicurio is a TypeScript project for api tooling. It focuses on this technical goal: Diff OpenAPI fragments and classify breaking or additive changes.
+`apicurio` is a TypeScript project for API tooling. It turns diff OpenAPI fragments and classify breaking or additive changes into a small local model with readable fixtures and a direct verification command.
 
-## Why it exists
+## Reading Apicurio
 
-Small engineering tools are easiest to trust when their rules are explicit, testable, and cheap to run locally. This repository packages a focused model with fixture data and a local verification path so behavior can be reviewed without external services.
+Start with the README, then open `metadata/project.json` to check the constants behind the examples. After that, `fixtures/cases.csv` shows the compact path and `examples/extended_cases.csv` gives a wider look at the same rule.
 
-## Features
+## What It Does
 
-- Deterministic policy scoring over fixture scenarios.
-- Clear accept or review decisions based on a documented threshold.
-- A command-line or local test path for quick validation.
-- Golden fixture data for repeatable checks.
-- Minimal dependencies and a compact project layout.
+- Includes extended examples for breaking checks, including `surge` and `degraded`.
+- Documents compatibility notes tradeoffs in `docs/operations.md`.
+- Runs locally with a single verification command and no external credentials.
+- Stores project constants and verification metadata in `metadata/project.json`.
+- Adds a repository audit script that checks structure before running the language verifier.
 
-## Architecture Notes
+## Purpose
 
-The core module exposes a small scoring API. Inputs are simple numeric signals: demand, capacity, latency, risk, and weight. The score uses a threshold of 156, risk penalty 6, latency penalty 2, and weight bonus 5. Tests exercise the public API against the fixture cases in `fixtures/cases.csv`.
+The repository exists to keep a technical idea small enough to reason about. The implementation avoids external dependencies where possible, then uses fixtures to make changes easy to review.
 
-## Setup
+## Files Worth Reading
 
-Install the TypeScript toolchain and run commands from the repository root.
+- `src`: primary implementation
+- `tests`: verification harness
+- `fixtures`: compact golden scenarios
+- `examples`: expanded scenario set
+- `metadata`: project constants and verification metadata
+- `docs`: operations and extension notes
+- `scripts`: local verification and audit commands
+- `package.json`: Node package scripts
+
+## Design Sketch
+
+The design is intentionally direct: parse or construct a signal, score it, classify it, and verify the expected branch. This makes the repository useful for studying api tooling behavior without needing a service or database unless the language project itself is SQL. The TypeScript project keeps types close to the model and compiles before running its checks.
 
 ## Usage
 
@@ -28,16 +39,31 @@ Install the TypeScript toolchain and run commands from the repository root.
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1
 ```
 
-The verification script builds or runs the project and checks the fixture decisions.
+This runs the language-level build or test path against the compact fixture set.
 
-## Tests
+## Fixture Notes
+
+The examples are meant to be readable before they are exhaustive. They cover enough variation to show how latency and risk can pull a decision below the threshold.
+
+## Verification
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/audit.ps1
 ```
 
-## Limitations And Roadmap
+The audit command checks repository structure and README constraints before it delegates to the verifier.
 
-- The fixture set is intentionally small so it can be audited by hand.
-- Future work could add richer domain-specific input adapters.
-- The model is a local demonstration and does not claim production use.
+## Limits
+
+This code is local-first. It makes no claim about deployed usage and avoids credentials, hosted state, and environment-specific setup.
+
+## Next Directions
+
+- Add malformed input fixtures so the failure path is as visible as the happy path.
+- Split the scoring constants into a typed configuration object and validate it before use.
+- Add a comparison mode that shows how decisions change when one signal is adjusted.
+- Add one more api tooling fixture that focuses on a malformed or borderline input.
+
+## Setup
+
+The only required setup is the local TypeScript toolchain. After cloning, stay in the repo root so fixture paths resolve correctly.

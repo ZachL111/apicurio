@@ -1,0 +1,7 @@
+name,demand,capacity,latency,risk,weight,score,decision,reason
+baseline,65,82,19,11,7,143,review,api tooling baseline scenario exercises the review path for bounded failure handling
+pressure,80,74,26,23,9,89,review,api tooling pressure scenario exercises the review path for bounded failure handling
+surge,104,97,20,13,12,247,accept,api tooling surge scenario keeps the local fixture within the modeled acceptance band
+degraded,65,59,31,24,6,13,review,api tooling degraded scenario exercises the review path for bounded failure handling
+recovery,92,106,16,12,9,231,accept,api tooling recovery scenario keeps the local fixture within the modeled acceptance band
+boundary,76,79,23,14,8,141,review,api tooling boundary scenario exercises the review path for bounded failure handling
